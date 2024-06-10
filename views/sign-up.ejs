@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h2>Sign Up</h2>
+    <form method="post">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        value="<%= locals.username %>"
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value="<%= locals.password %>"
+      />
+
+      <label for="password-confirm">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        value="<%= locals.confirmPassword %>"
+      />
+
+      <label for="firstName"> First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        value="<%= locals.firstName %>"
+      />
+
+      <label for="lastName"> Last Name </label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        value="<%= locals.lastName %>"
+      />
+
+      <button>Submit</button>
+    </form>
+    <% if (locals.errors) { %>
+    <div>
+      <ul>
+        <% for (error of errors) { %>
+        <li><%= error.msg %></li>
+        <% } %>
+      </ul>
+    </div>
+    <% } %>
+  </body>
+</html>

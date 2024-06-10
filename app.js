@@ -14,8 +14,7 @@ const debug = Debug("members-only:server");
 import { fileURLToPath } from "url";
 import path from "path";
 
-import indexRouter from "./routes/index.js";
-import usersRouter from "./routes/users.js";
+import router from "./routes/index.js";
 
 import User from "./models/user.js";
 
@@ -74,13 +73,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(function (req, res, next) {
-  req.session.bruh = "hahaha";
-  next();
-});
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use(router);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -88,6 +81,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
+// eslint-disable-next-line no-unused-vars
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
