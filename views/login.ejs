@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Log In</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h2>Log In</h2>
+    <form action="/login" method="post">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        value="<%= locals.username %>"
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value="<%= locals.password %>"
+      />
+
+      <button>Submit</button>
+    </form>
+    <% if (error) { %>
+    <div>Incorrect username or password</div>
+    <% } %>
+  </body>
+</html>

@@ -29,7 +29,7 @@ passport.use(
   new LocalStrategy(async function verify(username, password, done) {
     try {
       const message = "Incorrect username or password";
-      const user = await User.find({ username }).exec();
+      const user = await User.findOne({ username: username }).exec();
       if (!user) {
         return done(null, false, { message });
       }
@@ -67,6 +67,10 @@ app.use(
   })
 );
 app.use(passport.authenticate("session"));
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
