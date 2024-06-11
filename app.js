@@ -15,7 +15,6 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 import router from "./routes/index.js";
-
 import User from "./models/user.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -45,11 +44,16 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  done(null, user);
+  done(null, user._id);
 });
 
-passport.deserializeUser(function (user, done) {
-  done(null, user);
+passport.deserializeUser(async function (userId, done) {
+  try {
+    const user = await User.findById(userId);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
 });
 
 const app = express();
