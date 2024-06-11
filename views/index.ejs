@@ -8,11 +8,16 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <% if (locals.currentUser) { %>
+
     <p>Hello <%= currentUser.firstName %>!</p>
+    <a href="/new-message">Create a new message</a>
     <a href="/logout">Log Out</a>
+
     <% } else { %>
+
     <a href="/sign-up">Sign Up</a>
     <a href="/login">Log In</a>
+
     <% } %>
   </body>
 </html>
