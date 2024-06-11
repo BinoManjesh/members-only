@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Members Only</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Members Only</h1>
+    <p>Welcome to Members Only</p>
     <% if (locals.currentUser) { %>
 
     <p>Hello <%= currentUser.firstName %>!</p>
@@ -19,5 +19,22 @@
     <a href="/login">Log In</a>
 
     <% } %>
+
+    <div>
+      <ul>
+        <% for (message of messages) { %>
+        <li>
+          <div>
+            <h3><%= message.title %></h3>
+            <p><%= message.content %></p>
+            <% if (locals.currentUser && currentUser.accessLevel >= 1) { %>
+            <p><%= message.user.fullName %></p>
+            <p><%= message.createdAtFormatted %></p>
+            <% } %>
+          </div>
+        </li>
+        <% } %>
+      </ul>
+    </div>
   </body>
 </html>

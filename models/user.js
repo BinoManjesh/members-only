@@ -8,4 +8,8 @@ const UserSchema = new Schema({
   accessLevel: Number,
 });
 
+UserSchema.virtual("fullName").get(function () {
+  return this.firstName + this.lastName;
+});
+
 export default model("User", UserSchema);
