@@ -1,16 +1,11 @@
 import { Router } from "express";
 import Message from "../models/message.js";
 import asyncWrapper from "../utils/asyncWrapper.js";
+import { ensureLoggedin } from "../utils/middlewares.js";
 
 const router = Router();
 
-router.use("/new-message", (req, res, next) => {
-  if (!req.user) {
-    res.redirect("/login");
-  } else {
-    next();
-  }
-});
+router.use("/new-message", ensureLoggedin);
 
 router.get("/new-message", (req, res) => {
   res.render("new-message");
