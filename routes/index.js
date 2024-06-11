@@ -1,7 +1,7 @@
 import express from "express";
 import signUpRouter from "./sign-up.js";
 import loginRouter from "./login.js";
-import newMessageRouter from "./new-message.js";
+import messagesRouter from "./messages.js";
 import accessChangeRouter from "./access-change.js";
 import Message from "../models/message.js";
 import asyncWrapper from "../utils/asyncWrapper.js";
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use(signUpRouter);
 router.use(loginRouter);
-router.use(newMessageRouter);
+router.use(messagesRouter);
 router.use(accessChangeRouter);
 
 router.get(

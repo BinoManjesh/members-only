@@ -10,7 +10,7 @@
     <% if (locals.currentUser) { %>
 
     <p>Hello <%= currentUser.firstName %>!</p>
-    <a href="/new-message">Create a new message</a>
+    <a href="/messages/new">Create a new message</a>
     <a href="/change-membership">Become a member!</a>
     <a href="/logout">Log Out</a>
 
@@ -31,6 +31,11 @@
             <% if (locals.currentUser && currentUser.accessLevel >= 1) { %>
             <p><%= message.user.fullName %></p>
             <p><%= message.createdAtFormatted %></p>
+            <% } %> <% if (locals.currentUser && currentUser.accessLevel >= 2) {
+            %>
+            <form action="/messages/<%= message.id %>/delete" method="post">
+              <button>Delete</button>
+            </form>
             <% } %>
           </div>
         </li>
