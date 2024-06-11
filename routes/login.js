@@ -3,21 +3,20 @@ import passport from "passport";
 
 const router = Router();
 
-router.get("/login/:error?", (req, res) => {
+router.use("/login/:error?", (req, res, next) => {
   if (req.user) {
-    return res.redirect("/");
+    res.redirect("/");
+  } else {
+    next();
   }
+});
+
+router.get("/login/:error?", (req, res) => {
   res.render("login", { error: req.params.error });
 });
 
 router.post(
   "/login",
-  (req, res, next) => {
-    if (req.user) {
-      return res.redirect("/");
-    }
-    next();
-  },
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login/error=1",
