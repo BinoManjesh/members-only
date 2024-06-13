@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Members Only</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <h1>Members Only</h1>
-    <p>Welcome to Members Only</p>
-    <% if (locals.currentUser) { %>
+<%- include("header", {title: "Members Only"}) %>
 
-    <p>Hello <%= currentUser.firstName %>!</p>
-    <a href="/messages/new">Create a new message</a>
-    <a href="/user/accessLevel/update">Become a member!</a>
+<div class="p-10">
+  <nav
+    class="flex text-4xl justify-center gap-20 *:shadow *:bg-blue-400 *:px-5 *:py-2 *:rounded-full"
+  >
+    <% if (locals.currentUser) { %>
+    <a href="/messages/new">New Message</a>
+    <a href="/user/accessLevel/update">Membership</a>
     <a href="/logout">Log Out</a>
 
     <% } else { %>
@@ -20,27 +15,34 @@
     <a href="/login">Log In</a>
 
     <% } %>
+  </nav>
 
-    <div>
-      <ul>
-        <% for (message of messages) { %>
-        <li>
-          <div>
-            <h3><%= message.title %></h3>
-            <p><%= message.content %></p>
-            <% if (locals.currentUser && currentUser.accessLevel >= 1) { %>
-            <p><%= message.user.fullName %></p>
-            <p><%= message.createdAtFormatted %></p>
-            <% } %> <% if (locals.currentUser && currentUser.accessLevel >= 2) {
-            %>
+  <main class="py-10 max-w-screen-lg">
+    <ul class="flex flex-col gap-10">
+      <% for (message of messages) { %>
+      <li>
+        <div class="bg-blue-400 rounded-lg shadow-lg p-5 flex flex-col">
+          <div class="flex justify-between mb-3">
+            <h2 class="text-3xl"><%= message.title %></h2>
+            <% if (locals.currentUser && currentUser.accessLevel >= 2) {%>
             <form action="/messages/<%= message.id %>/delete" method="post">
-              <button>Delete</button>
+              <button class="bg-red-500 font-medium rounded-full px-4 py-1">
+                Delete
+              </button>
             </form>
             <% } %>
           </div>
-        </li>
-        <% } %>
-      </ul>
-    </div>
-  </body>
-</html>
+          <p><%= message.content %></p>
+          <% if (locals.currentUser && currentUser.accessLevel >= 1) { %>
+          <p class="self-end font-medium text-blue-900">
+            - <%= message.user.fullName %> <%= message.createdAtFormatted %>
+          </p>
+          <% } %>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+  </main>
+</div>
+
+<%- include("footer") %>
