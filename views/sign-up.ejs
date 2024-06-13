@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-  </head>
-  <body>
-    <h2>Sign Up</h2>
-    <form method="post">
+<%- include("header", {title: "Sign Up"}) %>
+
+<main class="p-5 flex flex-col gap-5 items-center">
+  <h2 class="text-5xl text-center">Sign Up</h2>
+  <form
+    method="post"
+    class="bg-blue-400 rounded-lg shadow-lg flex flex-col p-10 gap-5"
+  >
+    <div class="flex flex-col">
       <label for="username">Username</label>
       <input
         type="text"
@@ -14,7 +14,9 @@
         name="username"
         value="<%= locals.username %>"
       />
+    </div>
 
+    <div class="flex flex-col">
       <label for="password">Password</label>
       <input
         type="password"
@@ -22,7 +24,9 @@
         name="password"
         value="<%= locals.password %>"
       />
+    </div>
 
+    <div class="flex flex-col">
       <label for="password-confirm">Confirm Password</label>
       <input
         type="password"
@@ -30,7 +34,9 @@
         name="confirmPassword"
         value="<%= locals.confirmPassword %>"
       />
+    </div>
 
+    <div class="flex flex-col">
       <label for="firstName"> First Name</label>
       <input
         type="text"
@@ -38,7 +44,9 @@
         name="firstName"
         value="<%= locals.firstName %>"
       />
+    </div>
 
+    <div class="flex flex-col">
       <label for="lastName"> Last Name </label>
       <input
         type="text"
@@ -46,17 +54,19 @@
         name="lastName"
         value="<%= locals.lastName %>"
       />
-
-      <button>Submit</button>
-    </form>
-    <% if (locals.errors) { %>
-    <div>
-      <ul>
-        <% for (error of errors) { %>
-        <li><%= error.msg %></li>
-        <% } %>
-      </ul>
     </div>
-    <% } %>
-  </body>
-</html>
+
+    <button class="btn-submit">Submit</button>
+  </form>
+  <% if (locals.errors) { %>
+  <div class="errors">
+    <ul>
+      <% for (error of errors) { %>
+      <li><%= error.msg %></li>
+      <% } %>
+    </ul>
+  </div>
+  <% } %>
+</main>
+
+<%- include("footer") %>

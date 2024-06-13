@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  label {
+    @apply font-medium text-2xl;
+  }
+
+  input,
+  select,
+  textarea {
+    @apply bg-blue-200 rounded px-2 py-1;
+  }
+}
+
+@layer components {
+  .btn-submit {
+    @apply rounded-full bg-blue-600 px-5 py-2 text-2xl;
+  }
+
+  .errors {
+    @apply text-red-600 font-medium bg-red-300 rounded-lg shadow-lg p-5;
+  }
+}
