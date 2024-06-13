@@ -32,7 +32,7 @@
             </form>
             <% } %>
           </div>
-          <p><%= message.content %></p>
+          <pre class="font-sans"><%= message.content %></pre>
           <% if (locals.currentUser && currentUser.accessLevel >= 1) { %>
           <p class="self-end font-medium text-blue-900">
             - <%= message.user.fullName %> <%= message.createdAtFormatted %>
