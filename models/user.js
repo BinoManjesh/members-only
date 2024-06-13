@@ -9,7 +9,7 @@ const UserSchema = new Schema({
 });
 
 UserSchema.virtual("fullName").get(function () {
-  return this.firstName + this.lastName;
+  return this.firstName + " " + this.lastName;
 });
 
 export default model("User", UserSchema);
